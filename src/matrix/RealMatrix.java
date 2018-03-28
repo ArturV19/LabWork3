@@ -1,5 +1,7 @@
 package matrix;
 
+import exeptions.DimensionsOfMatricesAreNotEqualExeption;
+
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
@@ -21,16 +23,57 @@ public class RealMatrix {
     }
 
     /**
-     * TODO:
-     * <p>
      * Сложение двух матриц.
      *
-     * @param matrix1 - первая слагаемая матрица.
      * @param matrix2 - вторая слагаемая матрица.
      * @return - сумма матриц.
      */
-    public RealMatrix sumOfTwoMatrtix(RealMatrix matrix1, RealMatrix matrix2) {
-        return matrix1;
+    public RealMatrix sumOfTwoMatrtix(RealMatrix matrix2) throws DimensionsOfMatricesAreNotEqualExeption {
+
+        //Массив, который станет основой для возвращаемой матрицы:
+        double[][] respondingArray;
+
+        //Если первая матрица - единичная:
+        if (matrixIsIdentity(this)) {
+            respondingArray = new double[matrix2.array.length][matrix2.array[0].length];
+            for (int x = 0; x < matrix2.array.length; x++) {
+                for (int y = 0; y < matrix2.array[0].length; y++) {
+                    respondingArray[x][y] = matrix2.array[x][y] + this.array[0][0];
+                }
+            }
+            return new RealMatrix(respondingArray);
+        }
+
+        //Если вторая матрица - единичная:
+        else if (matrixIsIdentity(matrix2)) {
+            respondingArray = new double[this.array.length][this.array[0].length];
+            for (int x = 0; x < this.array.length; x++) {
+                for (int y = 0; y < this.array[0].length; y++) {
+                    respondingArray[x][y] = this.array[x][y] + matrix2.array[0][0];
+                }
+            }
+            return new RealMatrix(respondingArray);
+        }
+
+        //Если обе матрицы не единичные:
+        else {
+
+            //Если размеры матриц не равны:
+            if ((this.array.length != matrix2.array.length) || (matrix2.array[0].length != matrix2.array[0].length)) {
+                throw new DimensionsOfMatricesAreNotEqualExeption();
+            }
+
+            //Если размеры матриц равны:
+            else {
+                respondingArray = new double[this.array.length][this.array[0].length];
+                for (int x = 0; x < this.array.length; x++) {
+                    for (int y = 0; y < this.array[0].length; y++) {
+                        respondingArray[x][y] = this.array[x][y] + matrix2.array[x][y];
+                    }
+                }
+                return new RealMatrix(respondingArray);
+            }
+        }
     }
 
 
@@ -114,6 +157,21 @@ public class RealMatrix {
         this.array = array;
     }
 
+    /**
+     * Проверка, является ли матрица единичной.
+     *
+     * @param realMatrix - проверяемая матрица.
+     * @return результат проверки.
+     */
+    private static boolean matrixIsIdentity(RealMatrix realMatrix) {
+        if (realMatrix.getArray().length == 1) {
+            if (realMatrix.getArray()[0].length == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
@@ -123,7 +181,7 @@ public class RealMatrix {
             return false;
         }
         RealMatrix realMatrix = (RealMatrix) obj;
-        if(Arrays.deepEquals(this.array,(realMatrix.getArray()))){
+        if (Arrays.deepEquals(this.array, (realMatrix.getArray()))) {
             return true;
         }
         return false;

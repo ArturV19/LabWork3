@@ -31,7 +31,7 @@ public class WriteMatrix {
      *
      * @return - массив вещественных чисел, введённый пользователем.
      */
-    public static double[][] writeMatrix(){
+    public static double[][] writeMatrix() {
         int heightOfMatrix = MainMenu.scanner.nextInt();
         int lengthOfMatrix = MainMenu.scanner.nextInt();
         double[][] arrayOfDouble = new double[heightOfMatrix][lengthOfMatrix];
