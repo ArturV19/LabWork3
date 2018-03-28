@@ -10,28 +10,41 @@ import static org.junit.jupiter.api.Assertions.*;
 class RealMatrix_transposeOfMatrix_Tests {
 
     @org.junit.jupiter.api.Test
-    void testTransposeOfMatrix1() {
-        double[][] array = {{1,2},{3,4}};
+    void testTransposeOfMatrix_1() {
+        double[][] array = {{1, 2}, {3, 4}};
         RealMatrix realMatrix = new RealMatrix(array);
         RealMatrix realMatrixTranspose = RealMatrix.transposeOfMatrix(realMatrix);
 
         //Эталонные данные:
-        RealMatrix realMatrixExpected = new RealMatrix(new double[][]{{1,3},{2,4}});
+        RealMatrix realMatrixExpected = new RealMatrix(new double[][]{{1, 3}, {2, 4}});
 
         //Сравнение результатов работы с эталонными данными:
-        assertEquals(realMatrixExpected,realMatrixTranspose,"Неккоректный результат транспонирования");
+        assertEquals(realMatrixExpected, realMatrixTranspose, "Неккоректный результат транспонирования");
     }
 
     @org.junit.jupiter.api.Test
-    void testTransposeOfMatrix2() {
-        double[][] array = {{1},{2},{3}};
+    void testTransposeOfMatrix_2() {
+        double[][] array = {{1}, {2}, {3}};
         RealMatrix realMatrix = new RealMatrix(array);
         RealMatrix realMatrixTranspose = RealMatrix.transposeOfMatrix(realMatrix);
 
         //Эталонные данные:
-        RealMatrix realMatrixExpected = new RealMatrix(new double[][]{{1,2,3}});
+        RealMatrix realMatrixExpected = new RealMatrix(new double[][]{{1, 2, 3}});
 
         //Сравнение результатов работы с эталонными данными:
-        assertEquals(realMatrixExpected,realMatrixTranspose,"Неккоректный результат транспонирования");
+        assertEquals(realMatrixExpected, realMatrixTranspose, "Неккоректный результат транспонирования");
+    }
+
+    @org.junit.jupiter.api.Test
+    void testTransposeOfMatrix_3() {
+        double[][] array = {{1.5}};
+        RealMatrix realMatrix = new RealMatrix(array);
+        RealMatrix realMatrixTranspose = RealMatrix.transposeOfMatrix(realMatrix);
+
+        //Эталонные данные:
+        RealMatrix realMatrixExpected = new RealMatrix(new double[][]{{1.5}});
+
+        //Сравнение результатов работы с эталонными данными:
+        assertEquals(realMatrixExpected, realMatrixTranspose, "Неккоректный результат транспонирования");
     }
 }
