@@ -22,6 +22,7 @@ public class RealMatrix {
         this.array = array;
     }
 
+
     /**
      * Сложение двух матриц.
      *
@@ -78,17 +79,44 @@ public class RealMatrix {
 
 
     /**
-     * TODO:
-     * <p>
      * Вычитание двух матриц.
      *
-     * @param matrix1 - уменьшаемая матрица.
      * @param matrix2 - вычитаемая матрица.
      * @return - сумма матриц.
      */
-    public RealMatrix differenceOfTwoMatrtix(RealMatrix matrix1, RealMatrix matrix2) {
-        return matrix1;
+    public RealMatrix differenceOfTwoMatrtix(RealMatrix matrix2) throws DimensionsOfMatricesAreNotEqualExeption {
+
+        //Массив, который станет основой для возвращаемой матрицы:
+        double[][] respondingArray;
+
+        //Если вторая матрица - единичная:
+        if (matrixIsIdentity(matrix2)) {
+            respondingArray = new double[this.array.length][this.array[0].length];
+            for (int x = 0; x < this.array.length; x++) {
+                for (int y = 0; y < this.array[0].length; y++) {
+                    respondingArray[x][y] = this.array[x][y] - matrix2.array[0][0];
+                }
+            }
+            return new RealMatrix(respondingArray);
+        } else {
+            //Если размеры матриц не равны:
+            if ((this.array.length != matrix2.array.length) || (matrix2.array[0].length != matrix2.array[0].length)) {
+                throw new DimensionsOfMatricesAreNotEqualExeption();
+            }
+
+            //Если размеры матриц равны:
+            else {
+                respondingArray = new double[this.array.length][this.array[0].length];
+                for (int x = 0; x < this.array.length; x++) {
+                    for (int y = 0; y < this.array[0].length; y++) {
+                        respondingArray[x][y] = this.array[x][y] + matrix2.array[x][y];
+                    }
+                }
+                return new RealMatrix(respondingArray);
+            }
+        }
     }
+
 
     /**
      * TODO:
@@ -102,6 +130,7 @@ public class RealMatrix {
     public RealMatrix multiplicationOfTwoMatrix(RealMatrix matrix1, RealMatrix matrix2) {
         return matrix1;
     }
+
 
     /**
      * Транспонирование матрицы.
@@ -121,6 +150,7 @@ public class RealMatrix {
 
         return new RealMatrix(newArray);
     }
+
 
     /**
      * TODO:
@@ -157,6 +187,7 @@ public class RealMatrix {
         this.array = array;
     }
 
+
     /**
      * Проверка, является ли матрица единичной.
      *
@@ -171,6 +202,7 @@ public class RealMatrix {
         }
         return false;
     }
+
 
     @Override
     public boolean equals(Object obj) {
