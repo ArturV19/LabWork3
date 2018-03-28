@@ -109,7 +109,7 @@ public class RealMatrix {
                 respondingArray = new double[this.array.length][this.array[0].length];
                 for (int x = 0; x < this.array.length; x++) {
                     for (int y = 0; y < this.array[0].length; y++) {
-                        respondingArray[x][y] = this.array[x][y] + matrix2.array[x][y];
+                        respondingArray[x][y] = this.array[x][y] - matrix2.array[x][y];
                     }
                 }
                 return new RealMatrix(respondingArray);
