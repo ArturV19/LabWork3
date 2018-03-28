@@ -2,7 +2,6 @@ package tests.matrix_tests.RealMatrix_tests;
 
 import exeptions.DimensionsOfMatricesAreNotEqualExeption;
 import matrix.RealMatrix;
-import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
