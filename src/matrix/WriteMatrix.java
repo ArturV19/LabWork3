@@ -25,4 +25,23 @@ public class WriteMatrix {
 
         return arrayOfDouble;
     }
+
+    /**
+     * Ввод массива - основы матрицы при заранее неизвестных размерах.
+     *
+     * @return - массив вещественных чисел, введённый пользователем.
+     */
+    public static double[][] writeMatrix(){
+        int heightOfMatrix = MainMenu.scanner.nextInt();
+        int lengthOfMatrix = MainMenu.scanner.nextInt();
+        double[][] arrayOfDouble = new double[heightOfMatrix][lengthOfMatrix];
+
+        for (int line = 0; line < heightOfMatrix; line++) {
+            for (int row = 0; row < lengthOfMatrix; row++) {
+                arrayOfDouble[line][row] = MainMenu.scanner.nextDouble();
+            }
+        }
+
+        return arrayOfDouble;
+    }
 }
