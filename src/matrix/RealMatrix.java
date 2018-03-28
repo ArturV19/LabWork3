@@ -26,9 +26,9 @@ public class RealMatrix {
         this.array = array;
     }
 
-    //TODO:
-
     /**
+     * TODO:
+     * <p>
      * Сложение двух матриц.
      *
      * @param matrix1 - первая слагаемая матрица.
@@ -39,9 +39,10 @@ public class RealMatrix {
         return matrix1;
     }
 
-    //TODO:
 
     /**
+     * TODO:
+     * <p>
      * Вычитание двух матриц.
      *
      * @param matrix1 - уменьшаемая матрица.
@@ -52,9 +53,9 @@ public class RealMatrix {
         return matrix1;
     }
 
-    //TODO:
-
     /**
+     * TODO:
+     * <p>
      * Умножение двух матриц.
      *
      * @param matrix1 - первая слагаемая.
@@ -65,9 +66,9 @@ public class RealMatrix {
         return matrix1;
     }
 
-    //TODO:
-
     /**
+     * TODO:
+     * <p>
      * Транспонирование матрицы.
      *
      * @param matrix - исходная матрица.
@@ -77,9 +78,9 @@ public class RealMatrix {
         return matrix;
     }
 
-    //TODO:
-
     /**
+     * TODO:
+     * <p>
      * Анализ матрицы - проверка типа.
      * 1.) Квадратная?
      * 2.) Диагональная?
