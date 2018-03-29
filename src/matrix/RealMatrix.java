@@ -1,6 +1,7 @@
 package matrix;
 
 import exeptions.DimensionsOfMatricesAreNotEqualExeption;
+import exeptions.MatricesCanNotBeMultiplied;
 
 import java.util.Arrays;
 
@@ -23,10 +24,11 @@ public class RealMatrix {
 
 
     /**
-     * Сложение двух матриц.
+     * Слажение данной матрицы со слагаемой матрицей.
      *
-     * @param matrix2 - вторая слагаемая матрица.
-     * @return - сумма матриц.
+     * @param matrix2 - слагаемая матрица.
+     * @return - сумма двух матриц.
+     * @throws DimensionsOfMatricesAreNotEqualExeption - когда размеры матриц не подходят для сложения.
      */
     public RealMatrix sumOfTwoMatrtix(RealMatrix matrix2) throws DimensionsOfMatricesAreNotEqualExeption {
 
@@ -78,10 +80,11 @@ public class RealMatrix {
 
 
     /**
-     * Вычитание двух матриц.
+     * Вычитание матрицы из данной.
      *
      * @param matrix2 - вычитаемая матрица.
-     * @return - сумма матриц.
+     * @return - результат вычитания.
+     * @throws DimensionsOfMatricesAreNotEqualExeption - когда размеры матриц не подходят для операции разности.
      */
     public RealMatrix differenceOfTwoMatrtix(RealMatrix matrix2) throws DimensionsOfMatricesAreNotEqualExeption {
 
@@ -118,16 +121,37 @@ public class RealMatrix {
 
 
     /**
-     * TODO:
-     * <p>
      * Умножение двух матриц.
      *
-     * @param matrix1 - первая слагаемая.
      * @param matrix2 - вторая слагаемая.
      * @return - произведение матриц.
      */
-    public RealMatrix multiplicationOfTwoMatrix(RealMatrix matrix1, RealMatrix matrix2) {
-        return matrix1;
+    public RealMatrix multiplicationOfTwoMatrix(RealMatrix matrix2) throws MatricesCanNotBeMultiplied {
+        if (this.array[0].length != matrix2.array.length) {
+            throw new MatricesCanNotBeMultiplied();
+        }
+
+        int m = this.array.length;
+        int n = this.array[0].length;
+        int k = matrix2.array[0].length;
+
+        //Массив - основа для матрицы-произведения:
+        double[][] array = new double[m][k];
+
+        //Вспомогательная переменная для вычисления текущего элементы матрицы-произведения:
+        double element;
+
+        for (int line = 0; line < m; line++) {
+            for (int row = 0; row < k; row++) {
+                element = 0;
+                for (int i = 0; i < n; i++) {
+                    element += this.array[line][i] + matrix2.array[i][row];
+                }
+                array[line][row] = element;
+            }
+        }
+
+        return new RealMatrix(array);
     }
 
 
@@ -159,8 +183,8 @@ public class RealMatrix {
      * 4.) Единичная?
      *
      * @param matrix - анализируемая матрица.
-     *
-     * Итог работы метода - вывод результатов анализа матрицы в консоль.
+     *               <p>
+     *               Итог работы метода - вывод результатов анализа матрицы в консоль.
      */
     public static void analysisOfMatrix(RealMatrix matrix) {
         if (matrix.array.length == matrix.array[0].length) {
@@ -169,7 +193,7 @@ public class RealMatrix {
             System.out.println("1. Матрица НЕ квадратная");
         }
 
-        if(matrixIsDiagonal(matrix)) {
+        if (matrixIsDiagonal(matrix)) {
             System.out.println("2. Матрица диагональная");
         } else {
             System.out.println("2. Матрица НЕ диагональная");
@@ -220,7 +244,7 @@ public class RealMatrix {
     public static boolean matrixIsDiagonal(RealMatrix realMatrix) {
         int height = realMatrix.array.length;
         int length = realMatrix.array[0].length;
-        if(height!=length){
+        if (height != length) {
             return false;
         }
         for (int n = 0; n < height; n++) {
