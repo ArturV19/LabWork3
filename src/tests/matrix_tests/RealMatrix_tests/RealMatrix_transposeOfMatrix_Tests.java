@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Тестирование функции транспонирования матрицы.
+ * Тестирование метода транспонирования матрицы.
  */
 class RealMatrix_transposeOfMatrix_Tests {
 

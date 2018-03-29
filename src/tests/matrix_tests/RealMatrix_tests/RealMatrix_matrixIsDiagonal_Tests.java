@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Тестирование функции проверки, является ли RealMatrix-матрица диагональной.
+ * Тестирование метода проверки, является ли RealMatrix-матрица диагональной.
  */
-public class RealMatrix_matrixIsDiagonal_Tests {
+class RealMatrix_matrixIsDiagonal_Tests {
     @Test
     void testMatrixIsDiagonal_ZeroDiagonalMatrix() {
         RealMatrix realMatrix = new RealMatrix(new double[][]{{0, 0}, {0, 0}});
