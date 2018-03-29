@@ -127,31 +127,60 @@ public class RealMatrix {
      * @return - произведение матриц.
      */
     public RealMatrix multiplicationOfTwoMatrix(RealMatrix matrix2) throws MatricesCanNotBeMultiplied {
-        if (this.array[0].length != matrix2.array.length) {
-            throw new MatricesCanNotBeMultiplied();
-        }
+        double[][] respondingArray;
 
-        int m = this.array.length;
-        int n = this.array[0].length;
-        int k = matrix2.array[0].length;
-
-        //Массив - основа для матрицы-произведения:
-        double[][] array = new double[m][k];
-
-        //Вспомогательная переменная для вычисления текущего элементы матрицы-произведения:
-        double element;
-
-        for (int line = 0; line < m; line++) {
-            for (int row = 0; row < k; row++) {
-                element = 0;
-                for (int i = 0; i < n; i++) {
-                    element += (this.array[line][i] * matrix2.array[i][row]);
-                }
-                array[line][row] = element;
+        //Если матрицы не единичные:
+        if (!matrixIsIdentity(this) && !matrixIsIdentity(matrix2)) {
+            if (this.array[0].length != matrix2.array.length) {
+                throw new MatricesCanNotBeMultiplied();
             }
+
+            int m = this.array.length;
+            int n = this.array[0].length;
+            int k = matrix2.array[0].length;
+
+            //Массив - основа для матрицы-произведения:
+            respondingArray = new double[m][k];
+
+            //Вспомогательная переменная для вычисления текущего элементы матрицы-произведения:
+            double element;
+
+            for (int line = 0; line < m; line++) {
+                for (int row = 0; row < k; row++) {
+                    element = 0;
+                    for (int i = 0; i < n; i++) {
+                        element += (this.array[line][i] * matrix2.array[i][row]);
+                    }
+                    array[line][row] = element;
+                }
+            }
+
+            return new RealMatrix(array);
         }
 
-        return new RealMatrix(array);
+        //Если первая матрица - единичная:
+        else if (matrixIsIdentity(this)) {
+            respondingArray = new double[matrix2.array.length][matrix2.array[0].length];
+            for (int line = 0; line < matrix2.array.length; line++) {
+                for (int row = 0; row < matrix2.array[0].length; row++) {
+                    respondingArray[line][row] = matrix2.array[line][row] * this.array[0][0];
+                }
+            }
+
+            return new RealMatrix(respondingArray);
+        }
+
+        //Если вторая матрица - единичная:
+        else {
+            respondingArray = new double[this.array.length][this.array[0].length];
+            for (int line = 0; line < this.array.length; line++) {
+                for (int row = 0; row < this.array[0].length; row++) {
+                    respondingArray[line][row] = this.array[line][row] * matrix2.array[0][0];
+                }
+            }
+
+            return new RealMatrix(respondingArray);
+        }
     }
 
 
