@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Тестирование функции проверки, является ли RealMatrix-матрица нулевой.
+ * Тестирование метода проверки, является ли RealMatrix-матрица нулевой.
  */
 class RealMatrix_matrixIsZeros_Tests {
 

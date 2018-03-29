@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Тестирование метода произведения матриц.
+ */
 class RealMatrix_multiplicationOfTwoMatrix_Tests {
 
     @Test

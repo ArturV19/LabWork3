@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Тестирование функции сложения двух матриц.
+ * Тестирование метода сложения двух матриц.
  */
-public class RealMatrix_sumOfTwoMatrix_Tests {
+class RealMatrix_sumOfTwoMatrix_Tests {
 
     @Test
     void testSumOfTwoMatrix_1() throws DimensionsOfMatricesAreNotEqualExeption {
