@@ -36,7 +36,7 @@ public class RealMatrix {
         double[][] respondingArray;
 
         //Если первая матрица - единичная:
-        if (matrixIsIdentity(this)) {
+        if (matrixIsOneElement(this)) {
             respondingArray = new double[matrix2.array.length][matrix2.array[0].length];
             for (int line = 0; line < matrix2.array.length; line++) {
                 for (int row = 0; row < matrix2.array[0].length; row++) {
@@ -47,7 +47,7 @@ public class RealMatrix {
         }
 
         //Если вторая матрица - единичная:
-        else if (matrixIsIdentity(matrix2)) {
+        else if (matrixIsOneElement(matrix2)) {
             respondingArray = new double[this.array.length][this.array[0].length];
             for (int line = 0; line < this.array.length; line++) {
                 for (int row = 0; row < this.array[0].length; row++) {
@@ -92,7 +92,7 @@ public class RealMatrix {
         double[][] respondingArray;
 
         //Если вторая матрица - единичная:
-        if (matrixIsIdentity(matrix2)) {
+        if (matrixIsOneElement(matrix2)) {
             respondingArray = new double[this.array.length][this.array[0].length];
             for (int line = 0; line < this.array.length; line++) {
                 for (int row = 0; row < this.array[0].length; row++) {
@@ -130,7 +130,7 @@ public class RealMatrix {
         double[][] respondingArray;
 
         //Если матрицы не единичные:
-        if (!matrixIsIdentity(this) && !matrixIsIdentity(matrix2)) {
+        if (!matrixIsOneElement(this) && !matrixIsOneElement(matrix2)) {
             if (this.array[0].length != matrix2.array.length) {
                 throw new MatricesCanNotBeMultiplied();
             }
@@ -159,7 +159,7 @@ public class RealMatrix {
         }
 
         //Если первая матрица - единичная:
-        else if (matrixIsIdentity(this)) {
+        else if (matrixIsOneElement(this)) {
             respondingArray = new double[matrix2.array.length][matrix2.array[0].length];
             for (int line = 0; line < matrix2.array.length; line++) {
                 for (int row = 0; row < matrix2.array[0].length; row++) {
@@ -234,7 +234,7 @@ public class RealMatrix {
             System.out.println("3. Матрица НЕ нулевая");
         }
 
-        if (matrixIsIdentity(matrix)) {
+        if (matrixIsOneElement(matrix)) {
             System.out.println("4. Матрица единичная");
         } else {
             System.out.println("4. Матрица НЕ единичная");
@@ -310,13 +310,35 @@ public class RealMatrix {
     }
 
 
+    public static boolean matrixIsIdentity(RealMatrix realMatrix) {
+        if (realMatrix.array.length == realMatrix.array[0].length) {
+            for (int line = 0; line < realMatrix.array.length; line++) {
+                for (int row = 0; row < realMatrix.array[0].length; row++) {
+                    if (line == row) {
+                        if (realMatrix.array[line][row] != 1) {
+                            return false;
+                        }
+                    }
+                    if (line != row) {
+                        if (realMatrix.array[line][row] != 0) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
-     * Проверка, является ли матрица единичной.
+     * Проверка, является ли матрица состоящей из одного элемента.
      *
      * @param realMatrix - проверяемая матрица.
      * @return результат проверки.
      */
-    public static boolean matrixIsIdentity(RealMatrix realMatrix) {
+    public static boolean matrixIsOneElement(RealMatrix realMatrix) {
         if (realMatrix.getArray().length == 1) {
             if (realMatrix.getArray()[0].length == 1) {
                 return true;
@@ -343,14 +365,14 @@ public class RealMatrix {
 
     @Override
     public String toString() {
-        String string=new String();
+        String string = new String();
         String line;
-        for(int i=0; i<array.length;i++){
+        for (int i = 0; i < array.length; i++) {
             line = new String();
-            for (int j=0; j<array[0].length; j++){
-                line+=array[i][j]+" ";
+            for (int j = 0; j < array[0].length; j++) {
+                line += array[i][j] + " ";
             }
-            string+=line+"\n";
+            string += line + "\n";
         }
 
         return string;
