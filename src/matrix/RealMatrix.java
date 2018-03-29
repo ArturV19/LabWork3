@@ -340,4 +340,19 @@ public class RealMatrix {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        String string=new String();
+        String line;
+        for(int i=0; i<array.length;i++){
+            line = new String();
+            for (int j=0; j<array[0].length; j++){
+                line+=array[i][j]+" ";
+            }
+            string+=line+"\n";
+        }
+
+        return string;
+    }
 }
