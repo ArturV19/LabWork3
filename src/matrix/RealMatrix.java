@@ -234,7 +234,7 @@ public class RealMatrix {
             System.out.println("3. Матрица НЕ нулевая");
         }
 
-        if (matrixIsOneElement(matrix)) {
+        if (matrixIsIdentity(matrix)) {
             System.out.println("4. Матрица единичная");
         } else {
             System.out.println("4. Матрица НЕ единичная");
@@ -309,7 +309,12 @@ public class RealMatrix {
         return true;
     }
 
-
+    /**
+     * Метод проверяет, является ли матрица единичной.
+     *
+     * @param realMatrix - проверяемая матрица.
+     * @return - результат проверки.
+     */
     public static boolean matrixIsIdentity(RealMatrix realMatrix) {
         if (realMatrix.array.length == realMatrix.array[0].length) {
             for (int line = 0; line < realMatrix.array.length; line++) {
