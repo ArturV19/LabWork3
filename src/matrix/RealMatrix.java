@@ -145,7 +145,7 @@ public class RealMatrix {
             for (int row = 0; row < k; row++) {
                 element = 0;
                 for (int i = 0; i < n; i++) {
-                    element += this.array[line][i] + matrix2.array[i][row];
+                    element += (this.array[line][i] * matrix2.array[i][row]);
                 }
                 array[line][row] = element;
             }
