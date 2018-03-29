@@ -1,5 +1,8 @@
 package menu;
 
+import matrix.RealMatrix;
+import matrix.WriteMatrix;
+
 import java.util.Scanner;
 
 /**
@@ -12,7 +15,7 @@ public class WorkWithMatrix {
 
         while (true) {
             System.out.println("\n Начало ввода:");
-            System.out.println("Введите высоту первой матрицы \n" +
+            System.out.println("Введите высоту первой матрицы: \n" +
                     "(ввод не натурального значения в данный момент приведёт к возврату в главное меню программы)");
             userChoice = MainMenu.scanner.next();
 
@@ -21,9 +24,8 @@ public class WorkWithMatrix {
             //Проверка, можно ли привести ввод пользователя к целому:
             if (userChoice.matches("[-+]?\\d+")) {
                 heightOfFirstMatrix = Integer.parseInt(userChoice);
-                heightOfFirstMatrix = new Integer("5");
 
-                System.out.println("work");
+                mainJobWithMatrix(heightOfFirstMatrix);
             } else {
                 System.out.println("Введено не целое число, возврат в главное меню...");
                 break;
@@ -39,7 +41,6 @@ public class WorkWithMatrix {
      * @param heightOfFirstMatrix - количество строк в первой матрице.
      */
     public static void mainJobWithMatrix(int heightOfFirstMatrix) {
-        int lengthOfFirstMatrix = MainMenu.scanner.nextInt();
-
+        RealMatrix matrix = new RealMatrix(WriteMatrix.writeMatrix(heightOfFirstMatrix));
     }
 }
