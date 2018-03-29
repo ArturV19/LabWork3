@@ -32,6 +32,8 @@ public class WorkWithMatrix {
     }
 
     /**
+     * TODO:
+     * <p>
      * Основная работа программы.
      *
      * @param heightOfFirstMatrix - количество строк в первой матрице.
