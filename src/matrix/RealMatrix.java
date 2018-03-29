@@ -2,7 +2,6 @@ package matrix;
 
 import exeptions.DimensionsOfMatricesAreNotEqualExeption;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
@@ -37,9 +36,9 @@ public class RealMatrix {
         //Если первая матрица - единичная:
         if (matrixIsIdentity(this)) {
             respondingArray = new double[matrix2.array.length][matrix2.array[0].length];
-            for (int x = 0; x < matrix2.array.length; x++) {
-                for (int y = 0; y < matrix2.array[0].length; y++) {
-                    respondingArray[x][y] = matrix2.array[x][y] + this.array[0][0];
+            for (int line = 0; line < matrix2.array.length; line++) {
+                for (int row = 0; row < matrix2.array[0].length; row++) {
+                    respondingArray[line][row] = matrix2.array[line][row] + this.array[0][0];
                 }
             }
             return new RealMatrix(respondingArray);
@@ -48,9 +47,9 @@ public class RealMatrix {
         //Если вторая матрица - единичная:
         else if (matrixIsIdentity(matrix2)) {
             respondingArray = new double[this.array.length][this.array[0].length];
-            for (int x = 0; x < this.array.length; x++) {
-                for (int y = 0; y < this.array[0].length; y++) {
-                    respondingArray[x][y] = this.array[x][y] + matrix2.array[0][0];
+            for (int line = 0; line < this.array.length; line++) {
+                for (int row = 0; row < this.array[0].length; row++) {
+                    respondingArray[line][row] = this.array[line][row] + matrix2.array[0][0];
                 }
             }
             return new RealMatrix(respondingArray);
@@ -67,9 +66,9 @@ public class RealMatrix {
             //Если размеры матриц равны:
             else {
                 respondingArray = new double[this.array.length][this.array[0].length];
-                for (int x = 0; x < this.array.length; x++) {
-                    for (int y = 0; y < this.array[0].length; y++) {
-                        respondingArray[x][y] = this.array[x][y] + matrix2.array[x][y];
+                for (int line = 0; line < this.array.length; line++) {
+                    for (int row = 0; row < this.array[0].length; row++) {
+                        respondingArray[line][row] = this.array[line][row] + matrix2.array[line][row];
                     }
                 }
                 return new RealMatrix(respondingArray);
@@ -92,9 +91,9 @@ public class RealMatrix {
         //Если вторая матрица - единичная:
         if (matrixIsIdentity(matrix2)) {
             respondingArray = new double[this.array.length][this.array[0].length];
-            for (int x = 0; x < this.array.length; x++) {
-                for (int y = 0; y < this.array[0].length; y++) {
-                    respondingArray[x][y] = this.array[x][y] - matrix2.array[0][0];
+            for (int line = 0; line < this.array.length; line++) {
+                for (int row = 0; row < this.array[0].length; row++) {
+                    respondingArray[line][row] = this.array[line][row] - matrix2.array[0][0];
                 }
             }
             return new RealMatrix(respondingArray);
@@ -107,9 +106,9 @@ public class RealMatrix {
             //Если размеры матриц равны:
             else {
                 respondingArray = new double[this.array.length][this.array[0].length];
-                for (int x = 0; x < this.array.length; x++) {
-                    for (int y = 0; y < this.array[0].length; y++) {
-                        respondingArray[x][y] = this.array[x][y] - matrix2.array[x][y];
+                for (int line = 0; line < this.array.length; line++) {
+                    for (int row = 0; row < this.array[0].length; row++) {
+                        respondingArray[line][row] = this.array[line][row] - matrix2.array[line][row];
                     }
                 }
                 return new RealMatrix(respondingArray);
@@ -153,19 +152,40 @@ public class RealMatrix {
 
 
     /**
-     * TODO:
-     * <p>
-     * Анализ матрицы - проверка типа.
+     * Анализ матрицы - проверка типа матрицы:
      * 1.) Квадратная?
      * 2.) Диагональная?
      * 3.) Нулевая?
      * 4.) Единичная?
      *
      * @param matrix - анализируемая матрица.
-     * @return
+     *
+     * Итог работы метода - вывод результатов анализа матрицы в консоль.
      */
-    public void analysisOfMatrix(RealMatrix matrix) {
+    public static void analysisOfMatrix(RealMatrix matrix) {
+        if (matrix.array.length == matrix.array[0].length) {
+            System.out.println("1. Матрица квадратная");
+        } else {
+            System.out.println("1. Матрица НЕ квадратная");
+        }
 
+        if(matrixIsDiagonal(matrix)) {
+            System.out.println("2. Матрица диагональная");
+        } else {
+            System.out.println("2. Матрица НЕ диагональная");
+        }
+
+        if (matrixIsZeros(matrix)) {
+            System.out.println("3. Матрица нулевая");
+        } else {
+            System.out.println("3. Матрица НЕ нулевая");
+        }
+
+        if (matrixIsIdentity(matrix)) {
+            System.out.println("4. Матрица единичная");
+        } else {
+            System.out.println("4. Матрица НЕ единичная");
+        }
     }
 
 
@@ -189,12 +209,61 @@ public class RealMatrix {
 
 
     /**
+     * Проверка, является ли матрица диагональной.
+     * Сначала идёт проверка на квадратичность.
+     * Затем, если матрица квадратная, последовательно проверяются все элементы матрицы,
+     * кроме элементов на главной диагонали.
+     *
+     * @param realMatrix - проверяемая матрица.
+     * @return результат проверки.
+     */
+    public static boolean matrixIsDiagonal(RealMatrix realMatrix) {
+        int height = realMatrix.array.length;
+        int length = realMatrix.array[0].length;
+        if(height!=length){
+            return false;
+        }
+        for (int n = 0; n < height; n++) {
+            for (int m = 0; m < length; m++) {
+                if (n != m) {
+                    if (realMatrix.array[n][m] != 0) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+
+    /**
+     * Проверка, является ли матрица нулевой.
+     * Последовательно проверяются все элементы матрицы.
+     *
+     * @param realMatrix - проверяемая матрица.
+     * @return результат проверки.
+     */
+    public static boolean matrixIsZeros(RealMatrix realMatrix) {
+        int height = realMatrix.array.length;
+        int length = realMatrix.array[0].length;
+        for (int n = 0; n < height; n++) {
+            for (int m = 0; m < length; m++) {
+                if (realMatrix.array[n][m] != 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
+    /**
      * Проверка, является ли матрица единичной.
      *
      * @param realMatrix - проверяемая матрица.
      * @return результат проверки.
      */
-    private static boolean matrixIsIdentity(RealMatrix realMatrix) {
+    public static boolean matrixIsIdentity(RealMatrix realMatrix) {
         if (realMatrix.getArray().length == 1) {
             if (realMatrix.getArray()[0].length == 1) {
                 return true;
