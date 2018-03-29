@@ -1,6 +1,7 @@
 package tests.matrix_tests.RealMatrix_tests;
 
 import matrix.RealMatrix;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,7 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class RealMatrix_transposeOfMatrix_Tests {
 
-    @org.junit.jupiter.api.Test
+
+    @Test
     void testTransposeOfMatrix_1() {
         double[][] array = {{1, 2}, {3, 4}};
         RealMatrix realMatrix = new RealMatrix(array);
@@ -22,7 +24,8 @@ class RealMatrix_transposeOfMatrix_Tests {
         assertEquals(realMatrixExpected, realMatrixTranspose, "Неккоректный результат транспонирования");
     }
 
-    @org.junit.jupiter.api.Test
+
+    @Test
     void testTransposeOfMatrix_2() {
         double[][] array = {{1}, {2}, {3}};
         RealMatrix realMatrix = new RealMatrix(array);
@@ -35,7 +38,8 @@ class RealMatrix_transposeOfMatrix_Tests {
         assertEquals(realMatrixExpected, realMatrixTranspose, "Неккоректный результат транспонирования");
     }
 
-    @org.junit.jupiter.api.Test
+
+    @Test
     void testTransposeOfMatrix_3() {
         double[][] array = {{1.5}};
         RealMatrix realMatrix = new RealMatrix(array);
