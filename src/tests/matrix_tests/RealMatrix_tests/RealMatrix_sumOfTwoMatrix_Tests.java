@@ -22,7 +22,7 @@ public class RealMatrix_sumOfTwoMatrix_Tests {
         RealMatrix realMatrixExpected = new RealMatrix(new double[][]{{2, 4}, {3, 5}});
 
         //Сравнение результатов работы с эталонными данными:
-        assertEquals(realMatrixExpected, realMatrix1.sumOfTwoMatrtix(realMatrix2), "Неккоректный результат транспонирования");
+        assertEquals(realMatrixExpected, realMatrix1.sumOfTwoMatrtix(realMatrix2), "Неккоректный результат сложения");
     }
 
 
@@ -37,7 +37,7 @@ public class RealMatrix_sumOfTwoMatrix_Tests {
         RealMatrix realMatrixExpected = new RealMatrix(new double[][]{{0.5, 0.5}, {0.5, 0.5}});
 
         //Сравнение результатов работы с эталонными данными:
-        assertEquals(realMatrixExpected, realMatrix1.sumOfTwoMatrtix(realMatrix2), "Неккоректный результат транспонирования");
+        assertEquals(realMatrixExpected, realMatrix1.sumOfTwoMatrtix(realMatrix2), "Неккоректный результат сложения");
     }
 
 
